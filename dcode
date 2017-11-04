@@ -122,6 +122,16 @@ def decode(string):
         urle(string)
     else:
         pass
+    def hexenc(string):
+        string = string.replace('0x', '')
+        string = bytearray.fromhex(string).decode()
+        print g + ' Decoded from Hex : %s'%(string)
+        decode(string)
+        quit()
+    hexx = search(r'\d\d\d+', string)
+    hexxx = search(r'0x\d\d+', string)
+    if hexx or hexxx:
+        hexenc(string)
     def base64(string):
         string = b64decode(string)
         print g + ' Decoded from Base64 : %s'%(string)
@@ -153,18 +163,6 @@ def decode(string):
     deci = search(r'&#*;+', string)
     if deci:
         decimal(string)
-    else:
-        pass
-    def hexenc(string):
-        string = string.replace('0x', '')
-        string = bytearray.fromhex(string).decode()
-        print g + ' Decoded from Hex : %s'%(string)
-        decode(string)
-        quit()
-    hexx = search(r'\d\d\d+', string)
-    hexxx = search(r'0x\d\d+', string)
-    if hexx or hexxx:
-        hexenc(string)
     else:
         pass
 if args.roter:
