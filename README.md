@@ -32,7 +32,7 @@ git clone https://github.com/UltimateHackers/Decodify
 ```
 Now switch to Decodify directory and run the installer with this command:
 ```
-cd Decodify && chmod +x ./decodify.sh
+cd Decodify && chmod +x ./setup.sh
 ```
 Now you can run decodify by entering <b>dcode</b> in your terminal.<br>
 Happy decoding!
