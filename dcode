@@ -122,7 +122,7 @@ def decode(string):
         urle(string)
     else:
         pass
-    def base64(sring):
+    def base64(string):
         string = b64decode(string)
         print g + ' Decoded from Base64 : %s'%(string)
         decode(string)
