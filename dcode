@@ -114,7 +114,7 @@ def decode(string):
         fromchar(string)
     def urle(string):
         string = unquote(string)
-        print g + ' URL : %s'%(string)
+        print g + ' Decoded from URL encoding : %s'%(string)
         decode(string)
         quit()
     url = search(r'%..%..+', string)
