@@ -45,7 +45,12 @@ def rotifier(string, roter):
                         number = number + 1
         else:
             rotated.append(char)
-    print g + ' Rot%s : '%(roter),''.join(rotated)
+    string = ''.join(rotated)
+    print g + ' Rot%s : '%(roter), string
+    if args.roter == 'all':
+        pass
+    else:
+        decode(string)
 def decode(string):
     def binary(string):
         string = string.replace(' ', '')
