@@ -32,7 +32,7 @@ Boom! Thats what <b>Decodify</b> does. It automatically detects the encoding and
 **Warning:** Decodify uses third party web services for MD5, SHA1 & SHA2 hash lookups. If you are dealing with sensitive data, you are advised to use the `-s` option which will prevent Decodify to use these services.
 
 ##### Decoding Caesar Cipher
-You can supply the offest by `--rot` option or you can tell Decodify to decode for 1-20 offest by using `--rot all`
+You can supply the offest by `--rot` option or you can tell Decodify to decode for 1-26 offest by using `--rot all`
 
 ##### Reversing a String
 You can reverse a string by using the `-rev` option.
