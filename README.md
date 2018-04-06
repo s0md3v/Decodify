@@ -29,6 +29,8 @@ Boom! Thats what <b>Decodify</b> does. It automatically detects the encoding and
 - SHA1
 - SHA2
 
+**Warning:** Decodify uses third party web services for MD5, SHA1 & SHA2 hash lookups. If you are dealing with sensitive data, you are advised to use the `-s` option which will prevent Decodify to use these services.
+
 ##### Decoding Caesar Cipher
 You can supply the offest by `--rot` option or you can tell Decodify to decode for 1-20 offest by using `--rot all`
 
