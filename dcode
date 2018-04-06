@@ -23,6 +23,8 @@ print '''\033[1;32m
 args = parser.parse_args()
 string = args.string
 
+decoded = []
+
 def reverse(string):
     print '%s %s' % (g, string[::-1])
 
@@ -89,7 +91,7 @@ def MD5(string):
         print '\033[1;31m[-]\033[1;m Its a MD5 Hash but I failed to crack it.'
         quit()
 
-def fromchar(string):
+def fromchar(string, base):
         string = string.lower()
         string = string.strip('string.fromcharcode(').strip(')').strip(' ')
         jv_list = string.split(',')
@@ -98,30 +100,46 @@ def fromchar(string):
             i = i.replace(' ', '').replace('97', 'a').replace('98', 'b').replace('99', 'c').replace('100', 'd').replace('101', 'e').replace('102', 'f').replace('103', 'g').replace('104', 'h').replace('105', 'i').replace('106', 'j').replace('107', 'k').replace('108', 'l').replace('109', 'm').replace('110', 'n').replace('111', 'o').replace('112', 'p').replace('113', 'q').replace('114', 'r').replace('115', 's').replace('116', 't').replace('117', 'u').replace('118', 'v').replace('119', 'w').replace('120', 'x').replace('121', 'y').replace('122', 'z').replace('48', '0').replace('49', '1').replace('50', '2').replace('51', '3').replace('52', '4').replace('53', '5').replace('54', '6').replace('55', '7').replace('56', '8').replace('57', '9').replace('33', '!').replace('64', '@').replace('35', '#').replace('36', '$').replace('37', '%').replace('94', '^').replace('38', '&').replace('42', '*').replace('40', '(').replace('41', ')').replace('45', '-').replace('61', '=').replace('95', '_').replace('43', '+').replace('91', '[').replace('93', ']').replace('92', '\\').replace('59', ';').replace('39', '\'').replace('44', ',').replace('46', '.').replace('47', '/').replace('123', '{').replace('125', '}').replace('124', '|').replace('58', ':').replace('34', '"').replace('60', '<').replace('62', '>').replace('63', '?').replace('32', ' ').replace(',', '').replace('65', 'A').replace('66', 'B').replace('67', 'C').replace('68', 'D').replace('69', 'E').replace('70', 'F').replace('71', 'G').replace('72', 'H').replace('73', 'I').replace('74', 'J').replace('75', 'K').replace('76', 'L').replace('77', 'M').replace('78', 'N').replace('79', 'O').replace('80', 'P').replace('81', 'Q').replace('82', 'R').replace('83', 'S').replace('84', 'T').replace('85', 'U').replace('86', 'V').replace('87', 'W').replace('88', 'X').replace('89', 'Y').replace('90', 'Z').replace('32', ' ')       
             decoded.append(i)
         string = ''.join(decoded)
-        print g + ' Decoded from FromChar : %s'%(string)
+        if string in decoded:
+            quit()
+        print g + ' Decoded from FromChar : %s' % (string)
+        decoded.append(string)
+        decode(base, 'jv_char')
         decode(string)
         quit()
 
-def urle(string):
+def urle(string, base):
     string = unquote(string)
-    print g + ' Decoded from URL encoding : %s'%(string)
+    if string in decoded:
+        quit()
+    print g + ' Decoded from URL encoding : %s' % (string)
+    decoded.append(string)
+    decode(base, 'url')
     decode(string)
     quit()
 
-def hexenc(string):
+def hexenc(string, base):
     string = string.replace('0x', '')
-    string = bytearray.fromhex(string).decode()
-    print g + ' Decoded from Hex : %s'%(string)
+    string = bytearray.fromhex(string)
+    if string in decoded:
+        quit()
+    print g + ' Decoded from Hex : %s' % (string)
+    decoded.append(string)
+    decode(base, 'hexx')
     decode(string)
     quit()
 
-def base64(string):
+def base64(string, base):
     string = b64decode(string)
-    print g + ' Decoded from Base64 : %s'%(string)
+    if string in decoded:
+        quit()
+    print g + ' Decoded from Base64 : %s' % (string)
+    decoded.append(string)
+    decode(base, 'b64')
     decode(string)
     quit()
 
-def decimal(string):
+def decimal(string, base):
     calculated = []
     string = string.replace('&#', '').replace(';', ' ')
     str_list = string.split(' ')
@@ -134,36 +152,41 @@ def decimal(string):
                 calculated.append(chr(i))
             except:
                 pass
-    string = ''.join(calculated)
-    print g + ' Decoded from Decimal : %s'%(string.encode('utf-8'))
+    string = ''.join(calculated).encode('utf-8')
+    if string in decoded:
+        quit()
+    print g + ' Decoded from Decimal : %s' % (string)
+    decoded.append(string)
+    decode(base, 'deci')
     decode(string)
     quit()
 
-def decode(string):
+def decode(string, stop):
+    base = string
     sha2 = search(r'([a-f0-9]{64})', string)
-    if sha2:
+    if sha2 and stop != 'sha2':
         SHA2(string)
     sha1 = search(r'([a-f0-9]{40})', string)
-    if sha1:
+    if sha1 and stop != 'sha1':
         SHA1(string)
     md5 = search(r'([a-f0-9]{32})', string)
-    if md5:
+    if md5 and stop != 'md5':
         MD5(string)
     jv_char = search(r'\d*, \d*,', string)
-    if jv_char:
-        fromchar(string)
+    if jv_char and stop != 'jv_char':
+        fromchar(string, base)
     url = search(r'%..%..+', string)
-    if url:
-        urle(string)
+    if url and stop != 'url':
+        urle(string, base)
     hexx = search(r'^(0x|0X)?[a-fA-F0-9]+$', string)
-    if hexx:
-        hexenc(string)
+    if hexx and stop != 'hexx':
+        hexenc(string, base)
     b64 = search(r'^[A-Za-z0-9+\/=]+$', string)
-    if len(string)%4 == 0 and b64:
-        base64(string)
+    if len(string)%4 == 0 and b64 and stop != 'b64':
+        base64(string, base)
     deci = search(r'&#.*;+', string)
-    if deci:
-        decimal(string)
+    if deci and stop != 'deci':
+        decimal(string, base)
 
 if args.roter:
     if args.roter == 'all':
@@ -177,4 +200,4 @@ elif args.rev:
     reverse(args.string)
 
 else:
-    decode(args.string)
+    decode(args.string, 'none')
