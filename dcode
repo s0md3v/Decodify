@@ -167,9 +167,8 @@ def decode(string):
     url = search(r'%..%..+', string)
     if url:
         urle(string)
-    hexx = search(r'^[0-9]+$', string)
-    hexxx = search(r'0x[0-9]+$', string)
-    if hexx or hexxx:
+    hexx = search(r'^(0x|0X)?[a-fA-F0-9]+$', string)
+    if hexx:
         hexenc(string)
     b64 = search(r'^[A-Za-z0-9+\/=]+$', string)
     if len(string)%4 == 0 and b64:
