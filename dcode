@@ -1,6 +1,6 @@
 #!/usr/bin/env python2
 from re import search
-from urllib import unquote, urlencode
+from urllib import unquote, urlencode, urlopen
 from base64 import  b64decode
 import sys
 import argparse
@@ -57,13 +57,6 @@ def rotifier(string, roter):
         pass
     else:
         decode(string)
-
-def binary(string):
-    string = string.replace(' ', '')
-    string = ''.join(chr(int(string[i*8:i*8+8],2)) for i in range(len(string)//8))
-    print g + ' Decoded from Binary : %s'%(string)
-    decode(string)
-    quit()
 
 def SHA2(string):
     html = urlopen("http://md5decrypt.net/Api/api.php?hash="+hashvalue+"&hash_type=sha256&email=deanna_abshire@proxymail.eu&code=1152464b80a61728")
@@ -147,11 +140,6 @@ def decimal(string):
     quit()
 
 def decode(string):
-    con = string.isdigit()
-    if con:
-        bin = search(r'^[01]+$', string)
-        if bin:
-            binary(string)
     sha2 = search(r'([a-f0-9]{64})', string)
     if sha2:
         SHA2(string)
