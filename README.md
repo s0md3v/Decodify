@@ -1,43 +1,51 @@
 # Decodify
-It can detect and decode encoded strings, recursively. Its currently in beta phase.
+It can detect and decode encoded strings, recursively.
+Lets take this string : <b>s0md3v</b> and encode it in Base 64
+`
+czBtZDN2
+`
+Now lets encode it in hex
+`
+637a42745a444e32
+`
+And now again in Base 64
+`
+NjM3YTQyNzQ1YTQ0NGUzMg==
+`
+Now lets supply it **Decodify**
 
-Lets take this string : <b>teamultimate.in</b> and encode it with Hex, URL, Base64 and FromChar encoding, respectively.<br>
-Now lets pass this encoded string to Decodify:
+<img src='https://i.imgur.com/bsiEyiM.png' />
 
-<img src='https://i.imgur.com/toXdaa1.png' />
-
-Boom! Thats what <b>Decodify</b> does.
+Boom! Thats what <b>Decodify</b> does. It automatically detects the encoding and decodes it and it does that recursively.
 
 ### Supported Encodings and Encryptions
-- [x] Caesar ciphers
-- [x] Binary
-- [x] Hex
-- [x] Decimal
-- [x] Base64
-- [x] URL
-- [x] FromChar
-- [x] MD5
-- [x] SHA1
-- [x] SHA2
+- Caesar ciphers
+- Hex
+- Decimal
+- Base64
+- URL
+- FromChar
+- MD5
+- SHA1
+- SHA2
 
 ##### Decoding Caesar Cipher
-You can supply the offest by <b>--rot</b> option or you can tell Decodify to decode for 1-20 offest by using <b>--rot all</b>
+You can supply the offest by `--rot` option or you can tell Decodify to decode for 1-20 offest by using `--rot all`
 
-<img src='https://i.imgur.com/uuoTgua.png' />
+##### Reversing a String
+You can reverse a string by using the `-rev` option.
 
-### Installing Decodify
+### Usage
 Download Decodify with the following command:
 ```
 git clone https://github.com/UltimateHackers/Decodify
 ```
 Now switch to Decodify directory and run the installer with this command:
 ```
-cd Decodify && chmod +x ./setup.sh
+cd Decodify && chmod +x setup.sh && ./setup.sh
 ```
-Now you can run decodify by entering <b>dcode</b> in your terminal.<br>
-Happy decoding!
+Now you can run decodify by entering `dcode <string to decode>` in your terminal.
 
 ### Please Contribute
-Decodify needs huge improvements and bug fixes.<br>
 If you encounter a valid encoded string which wasn't correctly processed by Decodfiy, please open an issue including the string.<br>
 Also you can contribute by adding support for more encodings or by fixing my poorly writting code.
