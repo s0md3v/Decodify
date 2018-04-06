@@ -7,6 +7,7 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('string', help="string to be decoded")
+parser.add_argument('-s', help='for sensitive data', dest='sensitive', action="store_true")
 parser.add_argument('-rev', help='Reverse String', dest='rev', action="store_true")
 parser.add_argument('-rot', help="Caesar Cipher Offest", dest='roter')
 g = '\033[1;32m[+]\033[1;m'
@@ -22,6 +23,7 @@ print '''\033[1;32m
                                     %s/%s  \033[1;m'''%(w,e,w,e,w,e,w,e,w,e,w,e,w,e,w,e,w,e,w,e,w,e,w,e,w,e)
 args = parser.parse_args()
 string = args.string
+sensitive = args.sensitive
 
 decoded = []
 
@@ -164,13 +166,13 @@ def decimal(string, base):
 def decode(string, stop):
     base = string
     sha2 = search(r'([a-f0-9]{64})', string)
-    if sha2 and stop != 'sha2':
+    if sha2 and not sensitive:
         SHA2(string)
     sha1 = search(r'([a-f0-9]{40})', string)
-    if sha1 and stop != 'sha1':
+    if sha1 and not sensitive:
         SHA1(string)
     md5 = search(r'([a-f0-9]{32})', string)
-    if md5 and stop != 'md5':
+    if md5 and not sensitive:
         MD5(string)
     jv_char = search(r'\d*, \d*,', string)
     if jv_char and stop != 'jv_char':
