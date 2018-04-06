@@ -1,17 +1,17 @@
 # Decodify
-It can detect and decode encoded strings, recursively.
-Lets take this string : <b>s0md3v</b> and encode it in Base 64
-`
+It can detect and decode encoded strings, recursively.\
+Lets take this string : `s0md3v` and encode it in Base 64
+```
 czBtZDN2
-`
+```
 Now lets encode it in hex
-`
+```
 637a42745a444e32
-`
+```
 And now again in Base 64
-`
+```
 NjM3YTQyNzQ1YTQ0NGUzMg==
-`
+```
 Now lets supply it **Decodify**
 
 <img src='https://i.imgur.com/bsiEyiM.png' />
