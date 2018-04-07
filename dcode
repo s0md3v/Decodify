@@ -107,7 +107,7 @@ def fromchar(string, base):
         print g + ' Decoded from FromChar : %s' % (string)
         decoded.append(string)
         decode(base, 'jv_char')
-        decode(string)
+        decode(string, 'none')
         quit()
 
 def urle(string, base):
@@ -117,7 +117,7 @@ def urle(string, base):
     print g + ' Decoded from URL encoding : %s' % (string)
     decoded.append(string)
     decode(base, 'url')
-    decode(string)
+    decode(string, 'none')
     quit()
 
 def hexenc(string, base):
@@ -128,7 +128,7 @@ def hexenc(string, base):
     print g + ' Decoded from Hex : %s' % (string)
     decoded.append(string)
     decode(base, 'hexx')
-    decode(string)
+    decode(string, 'none')
     quit()
 
 def base64(string, base):
@@ -138,7 +138,7 @@ def base64(string, base):
     print g + ' Decoded from Base64 : %s' % (string)
     decoded.append(string)
     decode(base, 'b64')
-    decode(string)
+    decode(string, 'none')
     quit()
 
 def decimal(string, base):
@@ -160,7 +160,7 @@ def decimal(string, base):
     print g + ' Decoded from Decimal : %s' % (string)
     decoded.append(string)
     decode(base, 'deci')
-    decode(string)
+    decode(string, 'none')
     quit()
 
 def decode(string, stop):
