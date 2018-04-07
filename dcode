@@ -165,13 +165,13 @@ def decimal(string, base):
 
 def decode(string, stop):
     base = string
-    sha2 = search(r'([a-f0-9]{64})', string)
+    sha2 = search(r'^([a-f0-9]{64})$', string)
     if sha2 and not sensitive:
         SHA2(string)
-    sha1 = search(r'([a-f0-9]{40})', string)
+    sha1 = search(r'^([a-f0-9]{40})$', string)
     if sha1 and not sensitive:
         SHA1(string)
-    md5 = search(r'([a-f0-9]{32})', string)
+    md5 = search(r'^([a-f0-9]{32})$', string)
     if md5 and not sensitive:
         MD5(string)
     jv_char = search(r'\d*, \d*,', string)
