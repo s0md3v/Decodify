@@ -65,7 +65,7 @@ def rotifier(string, roter):
 def SHA2(string, base):
     html = urlopen("http://md5decrypt.net/Api/api.php?hash="+string+"&hash_type=sha256&email=deanna_abshire@proxymail.eu&code=1152464b80a61728")
     string = html.read()
-    if len(find) > 0:
+    if len(string) > 0:
         if string in decoded:
             quit()
         print g + ' Cracked SHA2 Hash: %s' % string
