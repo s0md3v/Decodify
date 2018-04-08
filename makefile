@@ -1,8 +1,10 @@
+DESTDIR ?= /usr/local/bin
+
 install:
-	@sudo cp dcode /usr/local/bin/
-	@sudo chmod +x /usr/local/bin/dcode
+	@sudo cp dcode $(DESTDIR)
+	@sudo chmod +x $(DESTDIR)/dcode
 	@echo "Everything is setup! Enter 'dcode <string>' in terminal to use decodify"
 
 uninstall:
-	@sudo rm -f /usr/local/bin/dcode
+	@sudo rm -f $(DESTDIR)/dcode
 	@echo "Decodify has been removed"
