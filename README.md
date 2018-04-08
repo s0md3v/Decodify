@@ -38,9 +38,14 @@ git clone https://github.com/UltimateHackers/Decodify
 ```
 Now switch to Decodify directory and run the installer with this command:
 ```
-cd Decodify && chmod +x setup.sh && ./setup.sh
+make install
 ```
 Now you can run decodify by entering `dcode <string to decode>` in your terminal.
+
+To remove Decodify run the uninstaller with this command
+```
+make uninstall
+```
 
 #### Decoding Caesar Cipher
 You can supply the offest by `--rot` option or you can tell Decodify to decode for 1-26 offest by using `--rot all`.\
