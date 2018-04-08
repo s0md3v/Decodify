@@ -5,4 +5,4 @@ install:
 
 uninstall:
 	@sudo rm -f /usr/local/bin/dcode
-	@echo "Decode has been removed"
+	@echo "Decodify has been removed"
