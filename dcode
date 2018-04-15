@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 import sys
 if sys.version_info[0]==3:
     py_version = 3
@@ -20,7 +21,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('string', help="string to be decoded")
 parser.add_argument('-s', help='for sensitive data', dest='sensitive', action="store_true")
 parser.add_argument('-rev', help='Reverse String', dest='rev', action="store_true")
-parser.add_argument('-rot', help="Caesar Cipher Offest", dest='roter', action="store_true")
+parser.add_argument('-rot', help="Caesar Cipher Offest", dest='roter')
 parser.add_argument('-file', help="for file with encoded string on each line", dest='files', action="store_true")
 
 g = '\033[1;32m[+]\033[1;m'
@@ -34,7 +35,10 @@ print('''\033[1;32m
   %s|%s   )|___)|    %s|%s   )|   )| |%s___%s \   %s)%s
   |__%s/%s |__  |%s__%s  |__/ %s|%s__/ | %s|%s     \_/ 
                                     %s/%s  \033[1;m'''%(w,e,w,e,w,e,w,e,w,e,w,e,w,e,w,e,w,e,w,e,w,e,w,e,w,e))
+
+
 args = parser.parse_args()
+print(args.roter)
 string = args.string
 sensitive = args.sensitive
 
@@ -134,7 +138,10 @@ def rotifier(string, roter):
     if args.roter == 'all':
         pass
     else:
-        decode(string)
+        try:
+            decode(string,'none')
+        except:
+            pass
 
 def SHA2(string, base):
     html = urlopen("http://md5decrypt.net/Api/api.php?hash="+string+"&hash_type=sha256&email=deanna_abshire@proxymail.eu&code=1152464b80a61728")
