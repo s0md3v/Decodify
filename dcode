@@ -60,7 +60,7 @@ def rotifier(string, roter):
     if args.roter == 'all':
         pass
     else:
-        decode(string)
+        decode(string, 'none')
 
 def SHA2(string, base):
     html = urlopen("http://md5decrypt.net/Api/api.php?hash="+string+"&hash_type=sha256&email=deanna_abshire@proxymail.eu&code=1152464b80a61728")
