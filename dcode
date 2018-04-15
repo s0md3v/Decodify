@@ -38,7 +38,6 @@ print('''\033[1;32m
 
 
 args = parser.parse_args()
-print(args.roter)
 string = args.string
 sensitive = args.sensitive
 
