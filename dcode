@@ -272,11 +272,7 @@ def decimal(string, base):
 
 def decode(string, stop):
     string = ensure_str(string)
-    if stop == 'stop':
-        print("SDA")
-        return 0
-        
-
+    
     if check_ascii(string):
         base = string
         sha2 = search(r'^([a-f0-9]{64})$', string)
