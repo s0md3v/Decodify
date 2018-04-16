@@ -42,6 +42,8 @@ string = args.string
 sensitive = args.sensitive
 
 decoded = []
+currentstring = 0
+listofstrings = []
 
 def ensure_str(s, encoding='latin-1', errors='strict'):
     """Coerce *s* to `str`.
@@ -76,35 +78,36 @@ def check_ascii(s):
 
 def files(args):
     _file = args.string
+    global listofstrings
     print("Decoding strings from",_file,'\n')
     try:
         with open(_file,'r') as f:
-            listofstrings = f.read().replace('\r','').split('\n')[:-1]
-        for string in listofstrings:
-            string = string.strip() 
-            print("Decoding : ",string)
-            if args.roter:
-                if args.roter == 'all':
-                    for roter in range(26):
-                        rotifier(string, roter)
-                else:
-                    roter = int(args.roter)
-                    rotifier(string, roter)
-
-            else:
-                try:
-                    decode(string, 'none')
-                except Exception:
-                    print('\n')
+            listofstrings = f.read().replace('\r','').split('\n')
+        if listofstrings[-1] == '':
+            listofstrings = listofstrings[:-1]
+        currentstring = 1
+        main(listofstrings[currentstring-1])
+        for x in range(1,len(listofstrings)): #for rot all
+            main(listofstrings[x])
     
     except FileNotFoundError:
         print("\033[1;31m[-]\033[1;m Couldn't find the file: ",_file)
 
 def Quit():
-    raise Exception("Couldnt find better way to quit a recursion")
+    global currentstring
+    global decoded
+    decoded = []
+    if len(listofstrings) == currentstring:
+        quit()
+    else:
+        print("String number: ", currentstring)
+        currentstring += 1
+        main(listofstrings[currentstring-1])
+    #raise Exception("Couldnt find better way to quit a recursion")
 
 def reverse(string):
     print('%s %s' % (g, string[::-1]))
+    Quit()
 
 def rotifier(string, roter):
     rotated = []
@@ -302,19 +305,27 @@ def decode(string, stop):
             decimal(string, base)
         return 1
 
-
-if args.files:
-    files(args)
-elif args.roter:
-    if args.roter == 'all':
-        for roter in range(26):
+def main(string=args.string):
+    print("Decoding : ",string)
+    global decoded
+    decoded = []
+    if args.roter:
+        if args.roter == 'all':
+            for roter in range(26):
+                rotifier(string, roter)
+        else:
+            roter = int(args.roter)
             rotifier(string, roter)
+
+    elif args.rev:
+        reverse(string)
+
     else:
-        roter = int(args.roter)
-        rotifier(string, roter)
+        decode(string, 'none')
 
-elif args.rev:
-    reverse(args.string)
 
-else:
-    decode(args.string, 'none')
+if __name__ == '__main__':
+    if args.files:
+        files(args)
+    else:
+        main()
