@@ -22,7 +22,6 @@ parser.add_argument('string', help="string to be decoded")
 parser.add_argument('-s', help='for sensitive data', dest='sensitive', action="store_true")
 parser.add_argument('-rev', help='Reverse String', dest='rev', action="store_true")
 parser.add_argument('-rot', help="Caesar Cipher Offest", dest='roter')
-parser.add_argument('-file', help="for file with encoded string on each line", dest='files', action="store_true")
 
 g = '\033[1;32m[+]\033[1;m'
 w = '\033[1;97m'
@@ -75,23 +74,6 @@ def check_ascii(s):
         return True
     except UnicodeDecodeError:
         return False'''
-
-def files(args):
-    _file = args.string
-    global listofstrings
-    print("Decoding strings from",_file,'\n')
-    try:
-        with open(_file,'r') as f:
-            listofstrings = f.read().replace('\r','').split('\n')
-        if listofstrings[-1] == '':
-            listofstrings = listofstrings[:-1]
-        currentstring = 1
-        main(listofstrings[currentstring-1])
-        for x in range(1,len(listofstrings)): #for rot all
-            main(listofstrings[x])
-    
-    except FileNotFoundError:
-        print("\033[1;31m[-]\033[1;m Couldn't find the file: ",_file)
 
 def Quit():
     global currentstring
@@ -302,7 +284,6 @@ def decode(string, stop):
         return 1
 
 def main(string=args.string):
-    print("Decoding : ",string)
     global decoded
     decoded = []
     if args.roter:
@@ -319,9 +300,4 @@ def main(string=args.string):
     else:
         decode(string, 'none')
 
-
-if __name__ == '__main__':
-    if args.files:
-        files(args)
-    else:
-        main()
+main()
