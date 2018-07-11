@@ -42,6 +42,7 @@ sensitive = args.sensitive
 
 decoded = []
 currentstring = 0
+loop = 0
 listofstrings = []
 
 def ensure_str(s, encoding='latin-1', errors='strict'):
@@ -206,7 +207,12 @@ def urle(string, base):
 
 def hexenc(string, base):
     string = string.replace('0x', '')
-    string = bytearray.fromhex(string)
+    try:
+    	string = bytearray.fromhex(string)
+    except:
+    	print ('\033[1;31m[-]\033[1;m Failed to detect the encoding.')
+    	if loop == 0:
+    		quit()
     string = ensure_str(string)
 
     if string in decoded:
@@ -254,7 +260,7 @@ def decimal(string, base):
 
 def decode(string, stop):
     string = ensure_str(string)
-    
+    global loop
     if check_ascii(string):
         base = string
         sha2 = search(r'^([a-f0-9]{64})$', string)
@@ -281,6 +287,10 @@ def decode(string, stop):
         deci = search(r'&#.*;+', string)
         if deci and stop != 'deci':
             decimal(string, base)
+        elif loop == 0:
+        	print ('\033[1;31m[-]\033[1;m Failed to detect the encoding.')
+        	quit()
+        loop += 1
         return 1
 
 def main(string=args.string):
