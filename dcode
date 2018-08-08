@@ -287,7 +287,7 @@ def decode(string, stop):
         deci = search(r'&#.*;+', string)
         if deci and stop != 'deci':
             decimal(string, base)
-        elif loop == 0:
+        elif not decoded:
         	print ('\033[1;31m[-]\033[1;m Failed to detect the encoding.')
         	quit()
         loop += 1
