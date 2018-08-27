@@ -16,6 +16,7 @@ from re import search
 from base64 import  b64decode
 import sys
 import argparse
+from huepy import *
 
 parser = argparse.ArgumentParser()
 parser.add_argument('string', help="string to be decoded")
@@ -23,7 +24,6 @@ parser.add_argument('-s', help='for sensitive data', dest='sensitive', action="s
 parser.add_argument('-rev', help='Reverse String', dest='rev', action="store_true")
 parser.add_argument('-rot', help="Caesar Cipher Offest", dest='roter')
 
-g = '\033[1;32m[+]\033[1;m'
 w = '\033[1;97m'
 e = '\033[1;m\033[1;32m'
 li = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
@@ -89,7 +89,7 @@ def Quit():
     #raise Exception("Couldnt find better way to quit a recursion")
 
 def reverse(string):
-    print('%s %s' % (g, string[::-1]))
+    print(bold(good(string[::-1])))
     Quit()
 
 def rotifier(string, roter):
@@ -119,7 +119,7 @@ def rotifier(string, roter):
             rotated.append(char)
     string = ''.join(rotated)
     string = ensure_str(string)
-    print(g + ' Rot%s : '%(roter), string)
+    print(bold(good('Rot%s : '))%(roter), string)
     if args.roter == 'all':
         pass
     else:
@@ -135,12 +135,12 @@ def SHA2(string, base):
     if len(string) > 0:
         if string in decoded:
             Quit()
-        print(g + ' Cracked SHA2 Hash: %s' % string)
+        print(bold(good('Cracked SHA2 Hash: %s')) % string)
         decoded.append(string)
         decode(base, 'sha2')
         Quit()
     else:
-        print('\033[1;31m[-]\033[1;m Its a SHA2 Hash but I failed to crack it.')
+        print(bold(bad('Its a SHA2 Hash but I failed to crack it.')))
         Quit()
 
 def SHA1(string, base):
@@ -153,12 +153,12 @@ def SHA1(string, base):
         string = ensure_str(string)
         if string in decoded:
             Quit()
-        print(g + ' Cracked SHA1 : %s' % string)
+        print(bold(good('Cracked SHA1 : %s')) % string)
         decoded.append(string)
         decode(base, 'sha1')
         Quit()
     else:
-        print('\033[1;31m[-]\033[1;m Its a SHA1 Hash but I failed to crack it.')
+        print(bold(bad('Its a SHA1 Hash but I failed to crack it.')))
         Quit()
 
 def MD5(string, base):
@@ -168,12 +168,12 @@ def MD5(string, base):
     if len(string) > 0:
         if string in decoded:
             Quit()
-        print(g + ' Cracked MD5 Hash : %s' % string)
+        print(bold(good('Cracked MD5 Hash : %s')) % string)
         decoded.append(string)
         decode(base, 'md5')
         Quit()
     else:
-        print('\033[1;31m[-]\033[1;m Its a MD5 Hash but I failed to crack it.')
+        print(bold(bad('Its a MD5 Hash but I failed to crack it.')))
         Quit()
 
 def fromchar(string, base):
@@ -188,7 +188,7 @@ def fromchar(string, base):
         string = ensure_str(string)
         if string in decoded:
             Quit()
-        print(g + ' Decoded from FromChar : %s' % (string))
+        print(bold(good('Decoded from FromChar : %s')) % (string))
         decoded.append(string)
         decode(string, 'none')
         decode(base, 'jv_char')
@@ -199,7 +199,7 @@ def urle(string, base):
     string = ensure_str(string)
     if string in decoded:
         Quit()
-    print(g + ' Decoded from URL encoding : %s' % (string))
+    print(bold(good('Decoded from URL encoding : %s')) % (string))
     decoded.append(string)
     decode(string, 'none')
     decode(base, 'url')
@@ -210,14 +210,14 @@ def hexenc(string, base):
     try:
     	string = bytearray.fromhex(string)
     except:
-    	print ('\033[1;31m[-]\033[1;m Failed to detect the encoding.')
+    	print (bold(bad('Failed to detect the encoding.')))
     	if loop == 0:
     		quit()
     string = ensure_str(string)
 
     if string in decoded:
         Quit()
-    print(g + ' Decoded from Hex : %s' % (string))
+    print(bold(good('Decoded from Hex : %s')) % (string))
     decoded.append(string)
     decode(string, 'none')
     decode(base, 'hexx')
@@ -228,7 +228,7 @@ def base64(string, base):
     string = ensure_str(string)
     if string in decoded:
         Quit()
-    print(g + ' Decoded from Base64 : %s' % (string))
+    print(bold(good('Decoded from Base64 : %s')) % (string))
     decoded.append(string)
     decode(string, 'none')
     decode(base, 'b64')
@@ -251,7 +251,7 @@ def decimal(string, base):
     string = ''.join(calculated).encode('utf-8')
     if string in decoded:
         Quit()
-    print(g + ' Decoded from Decimal : %s' % (string))
+    print(bold(good('Decoded from Decimal : %s')) % (string))
     decoded.append(string)
     
     decode(string, 'none')
@@ -288,7 +288,7 @@ def decode(string, stop):
         if deci and stop != 'deci':
             decimal(string, base)
         elif not decoded:
-        	print ('\033[1;31m[-]\033[1;m Failed to detect the encoding.')
+        	print (bold(bad('Failed to detect the encoding.')))
         	quit()
         loop += 1
         return 1
