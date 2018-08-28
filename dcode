@@ -14,6 +14,7 @@ else:
     from urllib import urlopen,unquote,urlencode
 from re import search
 from base64 import  b64decode
+import binascii
 import sys
 import argparse
 
@@ -234,6 +235,23 @@ def base64(string, base):
     decode(base, 'b64')
     Quit()
 
+def int_to_bytes(i):
+    hex_string = '%x' % i
+    n = len(hex_string)
+    return binascii.unhexlify(hex_string.zfill(n + (n & 1)))
+
+def bin_to_ascii(string, base):
+    n = int(string, 2)
+    string = int_to_bytes(n).decode()
+    string = ensure_str(string)
+    if string in decoded:
+        Quit()
+    print(g + ' Decoded from Binary : %s' % (string))
+    decoded.append(string)
+    decode(string, 'none')
+    decode(base, 'binary')
+    Quit()
+
 def decimal(string, base):
     calculated = []
     string = ensure_str(string)
@@ -263,6 +281,9 @@ def decode(string, stop):
     global loop
     if check_ascii(string):
         base = string
+        binary = search(r'^[01]+$', string)
+        if binary and stop != 'binary':
+            bin_to_ascii(string, base)
         sha2 = search(r'^([a-f0-9]{64})$', string)
         if sha2 and not sensitive and stop != 'sha2':
             SHA2(string, base)
