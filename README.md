@@ -22,6 +22,7 @@ Boom! Thats what <b>Decodify</b> does. It automatically detects the encoding and
 - Caesar ciphers
 - Hex
 - Decimal
+- Binary
 - Base64
 - URL
 - FromChar
