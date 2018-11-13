@@ -296,7 +296,7 @@ def decode(string, stop):
         jv_char = search(r'\d*, \d*,', string)
         if jv_char and stop != 'jv_char':
             fromchar(string, base)
-        url = search(r'%..%..+', string)
+        url = search(r'(%..)+', string)
         if url and stop != 'url':
             urle(string, base)
         hexx = search(r'^(0x|0X)?[a-fA-F0-9]+$', string)
