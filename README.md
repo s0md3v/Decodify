@@ -60,3 +60,17 @@ You can reverse a string by using the `-rev` option.
 ### Contribution
 If you encounter a valid encoded string which wasn't correctly processed by Decodfiy, please open an issue including the string.<br>
 You can also contribute by adding support for more encodings or by fixing my poorly writting code.
+
+
+
+#Decoder file is used to decode the following types of hashes:--
+
+1. sha256
+2. sha224
+3. sha512
+4. blake2s
+5. blake2b
+
+#Usage
+
+python3 decoder.py
