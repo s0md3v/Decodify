@@ -1,18 +1,18 @@
 # Decodify
 It can detect and decode encoded strings, recursively.\
-Lets take this string : `s0md3v` and encode it in Base 64
+Let's take this string : `s0md3v` and encode it in Base 64
 ```
 czBtZDN2
 ```
-Now lets encode it in hex
+Now let's encode it in hex
 ```
 637a42745a444e32
 ```
-And now again in Base 64
+And now again in Base64
 ```
 NjM3YTQyNzQ1YTQ0NGUzMg==
 ```
-Now lets supply it to **Decodify**
+Now let's supply it to **Decodify**
 
 <img src='https://i.imgur.com/bsiEyiM.png' />
 
@@ -58,5 +58,5 @@ Using `-rot all` option on the string `bpgkta xh qtiitg iwpc sr` gives the follo
 You can reverse a string by using the `-rev` option.
 
 ### Contribution
-If you encounter a valid encoded string which wasn't correctly processed by Decodfiy, please open an issue including the string.<br>
-You can also contribute by adding support for more encodings or by fixing my poorly writting code.
+If you encounter a valid encoded string which wasn't correctly processed by Decodify, please open an issue including the string.<br/>
+You can also contribute by adding support for more encodings or by fixing my poorly written code.
