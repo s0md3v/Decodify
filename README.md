@@ -49,7 +49,7 @@ make uninstall
 ```
 
 #### Decoding Caesar Cipher
-You can supply the offest by `--rot` option or you can tell Decodify to decode for 1-26 offest by using `--rot all`.\
+You can supply the offest by `-rot` option or you can tell Decodify to decode for 1-26 offest by using `-rot all`.\
 Using `-rot all` option on the string `bpgkta xh qtiitg iwpc sr` gives the following output:
 
 ![rot all demo](https://i.imgur.com/4mqxpBU.png)
